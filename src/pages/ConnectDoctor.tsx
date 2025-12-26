@@ -132,15 +132,18 @@ const ConnectDoctor: React.FC = () => {
     }
   };
 
-  const handleConnect = (doctorId: string) => {
-    // In a real app, this would initiate the connection
-    alert(
-      language === 'en'
-        ? `Connecting you with the doctor via ${selectedMethod}...`
-        : language === 'hi'
-        ? `${selectedMethod} के माध्यम से डॉक्टर से जोड़ रहे हैं...`
-        : `${selectedMethod} ಮೂಲಕ ವೈದ್ಯರೊಂದಿಗೆ ಸಂಪರ್ಕಿಸುತ್ತಿದ್ದೇವೆ...`
-    );
+  const handleConnect = (doctor: Doctor) => {
+    if (selectedMethod === 'chat') {
+      navigate(`/doctor-chat?doctor=${encodeURIComponent(getLocalizedName(doctor))}`);
+    } else {
+      alert(
+        language === 'en'
+          ? `Connecting you with ${getLocalizedName(doctor)} via ${selectedMethod}...`
+          : language === 'hi'
+          ? `${selectedMethod} के माध्यम से ${getLocalizedName(doctor)} से जोड़ रहे हैं...`
+          : `${selectedMethod} ಮೂಲಕ ${getLocalizedName(doctor)} ಅವರೊಂದಿಗೆ ಸಂಪರ್ಕಿಸುತ್ತಿದ್ದೇವೆ...`
+      );
+    }
   };
 
   return (
@@ -240,7 +243,7 @@ const ConnectDoctor: React.FC = () => {
 
                     {selectedMethod && doctor.available && (
                       <button
-                        onClick={() => handleConnect(doctor.id)}
+                        onClick={() => handleConnect(doctor)}
                         className="mt-4 w-full btn-large btn-primary text-base"
                       >
                         {t.connectNow}

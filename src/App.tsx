@@ -13,6 +13,7 @@ import VideoLibrary from "./pages/VideoLibrary";
 import ConnectDoctor from "./pages/ConnectDoctor";
 import UserProfile from "./pages/UserProfile";
 import DoctorChat from "./pages/DoctorChat";
+import InstallApp from "./pages/InstallApp";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => (
               <Route path="/connect-doctor" element={<ConnectDoctor />} />
               <Route path="/profile" element={<UserProfile />} />
               <Route path="/doctor-chat" element={<DoctorChat />} />
+              <Route path="/install" element={<InstallApp />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
